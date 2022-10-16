@@ -1,7 +1,7 @@
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
-load_dotenv()
+#load_dotenv()
 SECRET_KEY = os.getenv('MY_KEY', 'randompassword')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
