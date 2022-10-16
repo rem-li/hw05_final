@@ -16,12 +16,12 @@ class PostModelTest(TestCase):
     def setUpClass(cls):
         super().setUpClass()
         small_gif = (
-             b'\x47\x49\x46\x38\x39\x61\x02\x00'
-             b'\x01\x00\x80\x00\x00\x00\x00\x00'
-             b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
-             b'\x00\x00\x00\x2C\x00\x00\x00\x00'
-             b'\x02\x00\x01\x00\x00\x02\x02\x0C'
-             b'\x0A\x00\x3B'
+            b'\x47\x49\x46\x38\x39\x61\x02\x00'
+            b'\x01\x00\x80\x00\x00\x00\x00\x00'
+            b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
+            b'\x00\x00\x00\x2C\x00\x00\x00\x00'
+            b'\x02\x00\x01\x00\x00\x02\x02\x0C'
+            b'\x0A\x00\x3B'
         )
         uploaded = SimpleUploadedFile(
             name='small.gif',
@@ -174,8 +174,8 @@ class FollowModelTest(TestCase):
     def test_authorized_user_can_follow(self):
         """Зарегистрированный пользователь может подписаться"""
         reverse_name = reverse(
-                               'posts:profile_follow',
-                               kwargs={'username': self.post_author}
+            'posts:profile_follow',
+            kwargs={'username': self.post_author}
         )
         self.authorized_follower.get(reverse_name)
         self.assertTrue(
@@ -189,8 +189,8 @@ class FollowModelTest(TestCase):
         """Зарегистрированный пользователь может отписаться"""
         Follow.objects.create(author=self.post_author, user=self.follower)
         reverse_name = reverse(
-                               'posts:profile_unfollow',
-                               kwargs={'username': self.post_author}
+            'posts:profile_unfollow',
+            kwargs={'username': self.post_author}
         )
         self.authorized_follower.get(reverse_name)
         self.assertFalse(
@@ -213,11 +213,13 @@ class FollowModelTest(TestCase):
 
     def test_post_does_not_appears_on_follow_index(self):
         """Новый пост не появляется у не подписанных"""
-        new_post = Post.objects.create(
+        Post.objects.create(
             author=self.post_author,
             text='Новый тестовый пост',
         )
-        response = self.authorized_nonfollower.get(reverse('posts:follow_index'))
+        response = self.authorized_nonfollower.get(
+            reverse('posts:follow_index')
+        )
         self.assertEqual(len(response.context['page_obj']), 0)
 
 
