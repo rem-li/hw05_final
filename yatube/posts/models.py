@@ -57,6 +57,9 @@ class Comment(models.Model):
 
 
 class Follow(models.Model):
+    class Meta:
+        unique_together = ['user', 'author']
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
